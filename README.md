@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/alphagov/stageprompt.png?branch=master)](https://travis-ci.org/alphagov/stageprompt?branch=master)
-
 # Stageprompt
 
 `Stageprompt` is a javascript library for tracking a user journey in an
