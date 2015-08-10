@@ -41,13 +41,13 @@ The function should be added to the DOM onLoad event handler.
 
 Either use the "out of the box" setup for Google Analytics:
 
-    GOVUK.performance.stageprompt.setupForGoogleAnalytics();
+    LGSS.performance.stageprompt.setupForGoogleAnalytics();
 
 Or configure the callback yourself. In the example below an event is sent to
 Google Analytics for each stage:
 
     $(function () {
-      GOVUK.performance.stageprompt.setup(function (category, event, label) {
+      LGSS.performance.stageprompt.setup(function (category, event, label) {
         _gaq.push(['_trackEvent', category, event, label, undefined, true]);
       });
     });
@@ -55,7 +55,7 @@ Google Analytics for each stage:
 If you are using another analytics product, such as Piwik, you can configure the callback accordingly:
 
     $(function () {
-      GOVUK.performance.stageprompt.setup(function (category, event, label) {
+      LGSS.performance.stageprompt.setup(function (category, event, label) {
         // Code to send to your Piwik account
       });
     });
