@@ -9,12 +9,12 @@ describe("stageprompt", function () {
   });
 
   it("should exist in a namespace", function () {
-    expect(GOVUK.performance.stageprompt).not.toBeNull();
+    expect(LGSS.performance.stageprompt).not.toBeNull();
   });
 
   it("should not blow up if there are no data-journey tags", function () {
     expect($("[data-journey]").length).toBe(0);
-    GOVUK.performance.stageprompt.setup(function () {});
+    LGSS.performance.stageprompt.setup(function () {});
     // should not blow up
   });
 
@@ -35,7 +35,7 @@ describe("stageprompt", function () {
     it("should send an event if the page has a data-journey tag on the body", function () {
       $('body').attr('data-journey', 'test-journey:someStage');
       var spy = jasmine.createSpy();
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
 
       expect(analyticsCallback).toHaveBeenCalledWith("test-journey", "someStage");
     });
@@ -43,7 +43,7 @@ describe("stageprompt", function () {
     it("should send an event if the page has a data-journey tag on another tag", function () {
       $('#sandbox').attr('data-journey', 'test-journey:nextStep');
 
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
 
       expect(analyticsCallback).toHaveBeenCalledWith("test-journey", "nextStep");
     });
@@ -52,7 +52,7 @@ describe("stageprompt", function () {
       $('#sandbox').attr('data-journey', 'test-journey:stuff');
       $('#sandbox').html("<p id='foo' data-journey='test-journey:moreStuff'>something</p>");
 
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
 
       expect(analyticsCallback.callCount).toBe(1);
     });
@@ -76,7 +76,7 @@ describe("stageprompt", function () {
     it("should pass action parts as separate arguments to the callback", function() {
       $('#sandbox').attr('data-journey', 'part-1:part-2');
 
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
 
       expect(analyticsCallback).toHaveBeenCalledWith("part-1", "part-2");
     });
@@ -84,7 +84,7 @@ describe("stageprompt", function () {
     it("should pass a single-part action as one argument", function() {
       $('#sandbox').attr('data-journey', 'single-part');
 
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
 
       expect(analyticsCallback).toHaveBeenCalledWith("single-part");
     });
@@ -92,7 +92,7 @@ describe("stageprompt", function () {
     it("should pass at most three arguments to the callback", function() {
       $('#sandbox').attr('data-journey', 'part-1:part-2:part-3:additional-content');
 
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
 
       expect(analyticsCallback).toHaveBeenCalledWith("part-1", "part-2", "part-3:additional-content");
     });
@@ -110,7 +110,7 @@ describe("stageprompt", function () {
     
     it("should send an event when a help link is clicked", function () {
       $('#sandbox').attr('data-journey-click', 'test-journey:stuff:help');
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
       
       $('#sandbox').click();
       
@@ -121,7 +121,7 @@ describe("stageprompt", function () {
       $('#sandbox').append('<a href="#" id="1" data-journey-click="a">foo</a>');
       $('#sandbox').append('<a href="#" id="2" data-journey-click="b">bar</a>');
       
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
       $('#1').click();
       $('#2').click();
       
@@ -131,7 +131,7 @@ describe("stageprompt", function () {
     
     it("should send one event per click on tagged item", function () {
       $('#sandbox').append('<a href="#" id="1" data-journey-click="a">foo</a>');  
-      GOVUK.performance.stageprompt.setup(analyticsCallback);
+      LGSS.performance.stageprompt.setup(analyticsCallback);
     
       $('#1').click();
       $('#1').click();
@@ -155,7 +155,7 @@ describe("stageprompt", function () {
     it("should get set up to send events to google analytics", function () {
       $('#sandbox').append('<div id="box" data-journey="thisIsATest"></div>');
 
-      GOVUK.performance.stageprompt.setupForGoogleAnalytics();
+      LGSS.performance.stageprompt.setupForGoogleAnalytics();
       
       expect(_gaq.push).toHaveBeenCalled();
     });

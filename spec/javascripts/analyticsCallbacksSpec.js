@@ -6,15 +6,15 @@ describe("Analytics callback", function () {
       spyOn(_gaq, 'push');
     });
 
-    it("should push an event onto the google analytics que", function () {
-      GOVUK.performance.sendGoogleAnalyticsEvent('test');
+    it("should push an event onto the google analytics queue", function () {
+      LGSS.performance.sendGoogleAnalyticsEvent('test');
       
       expect(_gaq.push).toHaveBeenCalled();
       expect(method(_gaq.push.argsForCall)).toEqual('_trackEvent');
     });
 
     it("should use arguments as category, event, label", function() {
-      GOVUK.performance.sendGoogleAnalyticsEvent('arg-1', 'arg-2', 'arg-3');
+      LGSS.performance.sendGoogleAnalyticsEvent('arg-1', 'arg-2', 'arg-3');
 
       expect(_gaq.push).toHaveBeenCalled();
       expect(category(_gaq.push.argsForCall)).toEqual('arg-1');
@@ -23,7 +23,7 @@ describe("Analytics callback", function () {
     });
     
     it("should use sensible default values... eg. non interaction events so as not to mess with bounce rate", function () {
-      GOVUK.performance.sendGoogleAnalyticsEvent('test event')
+      LGSS.performance.sendGoogleAnalyticsEvent('test event')
 
       expect(category(_gaq.push.argsForCall)).toEqual('test event');
       expect(action(_gaq.push.argsForCall)).toEqual(undefined);
@@ -49,14 +49,14 @@ describe("Analytics callback", function () {
       });
 
       it("should push an event to ga", function () {
-        GOVUK.performance.sendGoogleAnalyticsEvent("test");
+        LGSS.performance.sendGoogleAnalyticsEvent("test");
 
         expect(_gaq.push).not.toHaveBeenCalled();
         expect(window.ga).toHaveBeenCalled();
       });
 
       it("should use arguments as category, event, label", function () {
-        GOVUK.performance.sendGoogleAnalyticsEvent('arg-1', 'arg-2', 'arg-3');
+        LGSS.performance.sendGoogleAnalyticsEvent('arg-1', 'arg-2', 'arg-3');
 
         expect(window.ga).toHaveBeenCalled();
         expect(window.ga.argsForCall[0][0]).toEqual('send');

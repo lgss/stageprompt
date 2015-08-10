@@ -7,7 +7,7 @@
 //
 // Setup (run this on document ready):
 //
-//   GOVUK.performance.stageprompt.setupForGoogleAnalytics();
+//   LGSS.performance.stageprompt.setupForGoogleAnalytics();
 //
 // Usage:
 //
@@ -21,11 +21,11 @@
 //
 //     <a class="help-button" href="#" data-journey-click="stage:help:info">See more info...</a>
 
-var GOVUK = GOVUK || {};
+var LGSS = LGSS || {};
 
-GOVUK.performance = GOVUK.performance || {};
+LGSS.performance = LGSS.performance || {};
 
-GOVUK.performance.stageprompt = (function () {
+LGSS.performance.stageprompt = (function () {
 
   var setup, setupForGoogleAnalytics, splitAction;
 
@@ -49,7 +49,7 @@ GOVUK.performance.stageprompt = (function () {
   };
 
   setupForGoogleAnalytics = function () {
-    setup(GOVUK.performance.sendGoogleAnalyticsEvent);
+    setup(LGSS.performance.sendGoogleAnalyticsEvent);
   };
 
   return {
@@ -58,7 +58,7 @@ GOVUK.performance.stageprompt = (function () {
   };
 }());
 
-GOVUK.performance.sendGoogleAnalyticsEvent = function (category, event, label) {
+LGSS.performance.sendGoogleAnalyticsEvent = function (category, event, label) {
   if (window.ga && typeof(window.ga) === 'function') {
     ga('send', 'event', category, event, label);
   } else {
